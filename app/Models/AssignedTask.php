@@ -11,7 +11,8 @@ class AssignedTask extends Model
     use HasFactory;
 
     protected $fillable = [
-        'assigned_to'
+        'assigned_to',
+        'completed'
     ];
 
     protected $hidden = [

@@ -108,7 +108,7 @@ class TaskController extends Controller
         ]);
 
         return response()->json([
-            'message' => $request->completed == 1 ? 'Task Completed' : 'Task Incomplete',
+            'message' => $request->completed ? 'Task Completed' : 'Task Incomplete',
         ]);
     }
 }

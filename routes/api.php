@@ -31,3 +31,7 @@ Route::middleware('auth:api')->apiResource('task', TaskController::class);
 Route::middleware('auth:api')->put('completed/task/{task}', [TaskController::class, 'completed'])->name('task.completed.api');
 
 Route::middleware('auth:api')->apiResource('assigned_task', AssignedTaskController::class);
+Route::middleware('auth:api')->put('completed/assigned_task/{assigned_task}', [AssignedTaskController::class, 'completed'])->name('assigned_task.completed.api');
+Route::middleware('auth:api')->get('my_assigned_task', [AssignedTaskController::class, 'myAssignedTask'])->name('assgined_task.my_assigned_task.api');
+
+

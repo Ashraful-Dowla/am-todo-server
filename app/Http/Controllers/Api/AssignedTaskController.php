@@ -125,4 +125,24 @@ class AssignedTaskController extends Controller
             'message' => 'Assigned Task successfully deleted',
         ]);
     }
+
+    public function completed(Request $request, AssignedTask $assignedTask)
+    {
+        $assignedTask->update([
+            'completed' => $request->completed,
+        ]);
+
+        return response()->json([
+            'message' => $request->completed ? 'Completed' : 'Incomplete',
+        ]);
+    }
+
+    public function myAssignedTask()
+    {
+        $taskList = AssignedTask::with('steps')->where('assigned_to', auth()->user()->id)
+            ->where('completed', 0)
+            ->get();
+        return response()->json($taskList);
+    }
+
 }
