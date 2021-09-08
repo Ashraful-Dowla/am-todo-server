@@ -4,7 +4,7 @@ use App\Http\Controllers\Api\AssignedTaskController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TaskController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\VerificationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register'])->name('register.api');
 Route::post('login', [AuthController::class, 'login'])->name('login.api');
 
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => ['auth:api', 'verified']], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout.api');
     Route::post('profile', [AuthController::class, 'profile'])->name('profile.api');
     Route::get('user_list', [AuthController::class, 'userList'])->name('userlist.api');
@@ -31,3 +31,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('completed/assigned_task/{assigned_task}', [AssignedTaskController::class, 'completed'])->name('assigned_task.completed.api');
     Route::get('my_assigned_task', [AssignedTaskController::class, 'myAssignedTask'])->name('assgined_task.my_assigned_task.api');
 });
+
+Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->name('verification.resend');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');

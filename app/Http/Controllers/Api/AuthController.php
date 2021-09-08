@@ -10,6 +10,7 @@ use Validator;
 
 class AuthController extends Controller
 {
+    
     public function register(Request $request)
     {
 
