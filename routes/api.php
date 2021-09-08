@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Api\AssignedTaskController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ResetPasswordController;
 use App\Http\Controllers\Api\TaskController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\VerificationController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,3 +36,6 @@ Route::group(['middleware' => ['auth:api', 'verified']], function () {
 
 Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->name('verification.resend');
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+
+Route::post('/forgot-password', [ResetPasswordController::class, 'reset'])->name('password.email');
+Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.api.update');
