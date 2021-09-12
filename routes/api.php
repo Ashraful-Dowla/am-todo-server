@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register'])->name('register.api');
 Route::post('login', [AuthController::class, 'login'])->name('login.api');
 
-Route::group(['middleware' => ['auth:api', 'verified']], function () {
+Route::group(['middleware' => ['auth:api']], function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout.api');
     Route::post('profile', [AuthController::class, 'profile'])->name('profile.api');
     Route::get('user_list', [AuthController::class, 'userList'])->name('userlist.api');
@@ -37,5 +37,5 @@ Route::group(['middleware' => ['auth:api', 'verified']], function () {
 Route::post('/email/verification-notification', [VerificationController::class, 'resend'])->name('verification.resend');
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 
-Route::post('/forgot-password', [ResetPasswordController::class, 'reset'])->name('password.email');
+Route::post('/forgot-password', [ResetPasswordController::class, 'reset'])->name('password.api.email');
 Route::post('/reset-password', [ResetPasswordController::class, 'resetPassword'])->name('password.api.update');
